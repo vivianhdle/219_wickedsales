@@ -1,10 +1,18 @@
 <?php
 
 require_once('mysqlconnect.php');
+set_exception_handler('handleError');
+require_once('functions.php');
+
+
 $query = 'SELECT p.`id`,p.`name`,p.`price`, i.`url` AS `images` FROM `products` AS p JOIN `images` AS i ON p.`id` = `i`.`products_id` ORDER by p.`id`';
 //SELECT p.`id`,p.`name`,p.`price`, i.`url` AS `images` FROM `products` AS p JOIN `images` AS i ON p.`id` = `i`.`products_id`
 /** procedural*/
 $result = mysqli_query($conn,$query);
+
+if (!$result){
+    throw new Exception('invalid query: '. mysqli_error($conn));
+}
 
 $data = [];
 
