@@ -13,6 +13,4 @@ if(!function_exists('handleError')){
 
 
 
-
-
 ?>
