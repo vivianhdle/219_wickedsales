@@ -1,8 +1,9 @@
 <?php
-
+require_once('config.php');
+require_once('functions.php');
 require_once('mysqlconnect.php');
 set_exception_handler('handleError');
-require_once('functions.php');
+
 
 
 $query = 'SELECT p.`id`,p.`name`,p.`price`, i.`url` AS `images` FROM `products` AS p JOIN `images` AS i ON p.`id` = `i`.`products_id` ORDER by p.`id`';

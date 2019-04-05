@@ -5,7 +5,7 @@ import SideNav from './sidenav';
 
 class Nav extends Component{
     renderLinks(){
-        return [
+        return (
             <Fragment>
                 <li>
                     <Link to="/">Home</Link>
@@ -14,7 +14,7 @@ class Nav extends Component{
                     <Link to="/products">Products</Link>
                 </li>
             </Fragment>
-        ]
+        )
     }
     render(){
         const links = this.renderLinks()
