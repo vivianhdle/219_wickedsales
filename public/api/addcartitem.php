@@ -1,8 +1,9 @@
 <?php
-require_once('mysqlconnect.php');
 require_once('functions.php');
 set_exception_handler('handleError');
 require_once('config.php');
+require_once('mysqlconnect.php');
+
 
 $product_id=1;
 $product_quantity=1;
@@ -10,7 +11,7 @@ $user_id=1;
 
 $query="SELECT `price` FROM `products` WHERE `id`= $product_id";
 
-$result=mysqli_connect($conn,$query);
+$result=mysqli_query($conn ,$query);
 
 if (!$result){
     throw new Exception(mysqli_error($conn));
@@ -24,7 +25,7 @@ $product_data= mysqli_fetch_assoc($result);
 
 $product_price= (int)$product_data['price'];
 
-$product_total=$product_quanity*$product_price;
+$product_total=$product_quantity*$product_price;
 
 if(empty($carts_id)){
     $cart_create_query="INSERT INTO `carts` SET
@@ -35,7 +36,7 @@ if(empty($carts_id)){
         `changed` = NOW()
     ";
     $cart_result=mysqli_query($conn,$cart_create_query);
-    if (!cart_result){
+    if (!$cart_result){
         throw new Exception(mysqli_error($conn));
     }
     if(mysqli_affected_rows($conn)===0){
@@ -46,10 +47,9 @@ if(empty($carts_id)){
 
 $cart_items_query = "INSERT INTO `cart_items` SET
     `products_id` = $product_id,
-    `quantity`=$product_quanity,
+    `quantity`=$product_quantity,
     `carts_id`=$carts_id
 ";
-print($cart_items_query);
 
 $cart_item_result = mysqli_query($conn,$cart_items_query);
 
@@ -63,7 +63,7 @@ if(mysqli_affected_rows($conn)===0){
 
 $output= [
     'success'=>true,
-    'cartCount'=>$product_quanity,
+    'cartCount'=>$product_quantity,
     'cartTotal'=>$product_total
 
 ];
