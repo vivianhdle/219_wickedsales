@@ -1,5 +1,6 @@
 .products{
     .product-item{
+        display:block;
         cursor:pointer;
         &:hover{
             background-color:lightcoral;
@@ -7,4 +8,8 @@
         }
     }
 
+}
+
+.carousel{
+    height:200px;
 }

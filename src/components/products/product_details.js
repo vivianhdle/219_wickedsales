@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import 'materialize-css/dist/css/materialize.min.css'
+import 'materialize-css/dist/js/materialize.min'
 
 
 class ProductDetails extends Component{
@@ -25,17 +27,35 @@ class ProductDetails extends Component{
         
     }
     render(){
-        console.log('product details: ',this.state.details);
-        const {details}=this.state
+        const {details}=this.state;
         if(details===null){
             return <h1 className="center">LOADING...</h1>
         }else if(!details){
             return <h1 className="center">No product found</h1>
         }
-        const{description = 'No description availiable',name}=details;
+        console.log(details);
+        const carousel = details.images.map((image,index)=>{
+            let url = `/dist/${image}`
+            return (
+                <a key={index} className="carousel-item">
+                    <img src={url} className=""/>
+                </a>
+            )
+        })
+        $(document).ready(function(){
+            $('.carousel').carousel();
+            setInterval(()=>{
+                $('.carousel').carousel('next');
+            },5000)
+        });
+        const{description = 'No description availiable',name,miscDetails}=details;
+        
         return(
             <div className="product-details">
                 <h1 className="center">{name}</h1>
+                <div className="carousel">
+                    {carousel}
+                </div>
                 <p>{description}</p>
             </div>
         )
