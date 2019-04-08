@@ -9,6 +9,9 @@ class ProductList extends Component{
             products:[]
         }
     }
+    goToDetails = id => {
+        this.props.history.push(`/products/${id}`)
+    }
     componentDidMount(){
         this.getProducts();
     }
@@ -22,7 +25,7 @@ class ProductList extends Component{
     render(){
         const {products} = this.state
         const productList = products.map((product)=>{
-            return <ProductItem key={product.id} {...product}/>
+            return <ProductItem key={product.id} {...product} goToDetails={this.goToDetails}/>
         })
         return(
             <div className="product-list">

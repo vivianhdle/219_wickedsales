@@ -1,0 +1,40 @@
+.products{
+    .product-item{
+        display:block;
+        cursor:pointer;
+        &:hover{
+            background-color:lightcoral;
+            transition: all ease-in .2s;
+        }
+    }
+    .product-details{
+        .product-price{
+            font-size:3.5em;
+            font-weight: bold;
+        }
+        .carousel{
+            height:225px;
+            
+            .indicators {
+                background-color:rgb(231, 231, 231);
+            }
+        }
+        .add-to-cart{
+            font-size:2em;
+            
+            .qty-container{
+                vertical-align: middle;
+                margin:0 30px;
+                
+                .product-qty{
+                    padding:0 20px;
+                }
+            }
+            button {
+                position: relative;
+                top: 2px;
+            }
+        }
+    }
+
+}
