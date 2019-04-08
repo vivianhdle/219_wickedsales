@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 
 class SideNav extends Component{
     componentDidMount(){
-        console.log('mounted:', this.sidenav);
         M.Sidenav.init(this.sidenav);
     }
     render(){
