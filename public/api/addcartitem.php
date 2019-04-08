@@ -5,6 +5,10 @@ require_once('config.php');
 require_once('mysqlconnect.php');
 
 
+if (empty($_GET['product_id'])){
+    throw new Exception ('You must send a product_id (int) with your request')
+}
+
 $product_id= intval($_GET['product_id']);
 $product_quantity=1;
 $user_id=1;
