@@ -6,8 +6,8 @@ require_once('mysqlconnect.php');
 
 
 if (empty($_GET['product_id'])){
-    throw new Exception ('You must send a product_id (int) with your request')
-}
+    throw new Exception ('You must send a product_id (int) with your request');
+};
 
 $product_id= intval($_GET['product_id']);
 $product_quantity=1;
@@ -50,6 +50,18 @@ if(empty($_SESSION['carts_id'])){
     $_SESSION['carts_id']= $carts_id;
 }else{
     $carts_id = $_SESSION['carts_id'];
+    $update_cart_query="UPDATE `carts` SET 
+    `item_count`=`item_count`+ $product_quantity,
+    `total_price`=`total_price` + $product_total 
+    WHERE `id` = $carts_id";
+    print($update_cart_query);
+    $update_result=mysqli_query($conn,$update_cart_query);
+    if (!$update_result){
+        throw new Exception(mysqli_error($conn));
+    }
+    if(mysqli_affected_rows($conn)===0){
+        throw new Exception('Cart data was not updated');
+    }
 }
 
 $cart_items_query = "INSERT INTO `cart_items` SET
