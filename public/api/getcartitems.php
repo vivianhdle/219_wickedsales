@@ -13,7 +13,7 @@ if(empty($_SESSION['carts_id'])){
 }
 
 $carts_id=$_SESSION['carts_id'];
-
+$users_id = 1;
 $cart_data_query= "SELECT `c`.`created`,`c`.`total_price`,`c`.`item_count`
 FROM `carts` AS `c`
 WHERE `c`.`id` = $carts_id";
@@ -41,7 +41,7 @@ JOIN `carts`
 ON `c`.`carts_id`=`carts`.`id`
 JOIN `images` AS `i`
 ON `c`.`products_id`=`i`.`products_id`
-WHERE `carts`.`id` = $carts_id
+WHERE `carts`.`id` = $carts_id AND `c`.`users_id` = $users_id
 GROUP BY `c`.`products_id`";
 
 $cart_items_results=mysqli_query($conn,$cart_items_query);
