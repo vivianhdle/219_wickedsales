@@ -2,8 +2,6 @@ import React from 'react';
 import {toWords} from '../../helpers'
 export default props => {
     const {details}=props;
-    console.log('Misc details props',details);
-    console.log('Object Keys: ', Object.keys(details));
     const additionalInfo = Object.keys(details).map((key)=>{
         let values = details[key];
         if(Array.isArray(values)){

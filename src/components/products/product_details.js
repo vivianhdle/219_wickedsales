@@ -5,7 +5,7 @@ import 'materialize-css/dist/js/materialize.min';
 import ProductCarousel from './product_carousel';
 import {formatMoney} from '../../helpers'
 import MiscDetails from './misc_details';
-
+import ProductAdd from './product_add';
 
 class ProductDetails extends Component{
     state = {
@@ -31,6 +31,7 @@ class ProductDetails extends Component{
     }
     render(){
         const {details}=this.state;
+        const {params}=this.props.match;
         if(details===null){
             return <h1 className="center">LOADING...</h1>
         }else if(!details){
@@ -44,14 +45,7 @@ class ProductDetails extends Component{
                     <ProductCarousel images={images}/>
                     <div className="col s12 m8">
                         <div className="right-align product-price">{formatMoney(price)}</div>
-                        <div className="right-align add-to-cart">
-                            <span className="qty-container">
-                                <button className="btn btn-floating green lighten-3 btn-small"><i class="material-icons">remove</i></button>
-                                <span className="product-qty">1</span>
-                                <button className="btn btn-floating green lighten-3 btn-small"><i class="material-icons">add</i></button>
-                            </span>
-                            <button className="green lighten-3 btn"><i class="material-icons">add_shopping_cart</i></button>
-                        </div>
+                            <ProductAdd productId={params.product_id}/>
                         <p>{description}</p>
                         <MiscDetails details={miscDetails}/>
                     </div>
