@@ -41,7 +41,7 @@ JOIN `carts`
 ON `c`.`carts_id`=`carts`.`id`
 JOIN `images` AS `i`
 ON `c`.`products_id`=`i`.`products_id`
-WHERE `carts`.`id` = $carts_id AND `c`.`users_id` = $users_id
+WHERE `carts`.`id` = $carts_id AND `carts`.`users_id` = $users_id
 GROUP BY `c`.`products_id`";
 
 $cart_items_results=mysqli_query($conn,$cart_items_query);
