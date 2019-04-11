@@ -18,7 +18,7 @@ if (!empty($_SESSION['user_data'])){
     }
     $token=addslashes($input['token']);
 }
-$login_check_query="SELECT * FROM `user_connections` WHERE `token`=$token";
+$login_check_query="SELECT * FROM `user_connections` WHERE `token`='$token'";
 $login_result = mysqli_query($conn,$login_check_query);
 
 if ($login_result){
