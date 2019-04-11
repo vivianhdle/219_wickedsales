@@ -20,6 +20,8 @@ if(empty($input['password'])){
 }
 $email = $input['email'];
 $password = $input['password'];
+$email=addslashes($email);
+
 $hashed_password=sha1($password);
 
 unset($input['password']);
