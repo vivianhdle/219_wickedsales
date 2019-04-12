@@ -1,0 +1,43 @@
+nav{
+    padding:0 12px;
+    .sidenav-cart{
+        display:none;
+    }
+}
+
+
+.cart-link{
+    position:relative;
+    
+    .cart-icon{
+        font-size:1.5em;
+    }
+
+    .cart-items{
+        background-color: lightcoral;
+        position: absolute;
+        border-radius: 50%;
+        top: 34px;
+        right: 28px;
+        color: white;
+        line-height: 14px;
+        width: 14px;
+        display: inline-block;
+        text-align: center;
+        font-size: 10px;
+    }
+}
+.sidenav{
+    .cart-link{
+        .cart-icon{
+            display:none;
+        }
+        .cart-items{
+            border-radius:0;
+            padding:4px 12px;
+            top:15px;
+            width:auto;
+        }
+    }
+    
+}
