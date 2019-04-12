@@ -8,6 +8,7 @@ import Home from './home';
 import Nav from './nav';
 import NotFound from './404'
 import Cart from './cart';
+import axios from 'axios';
 
 class App extends Component {
     constructor(props){
@@ -21,6 +22,13 @@ class App extends Component {
         this.setState({
             cartItems:count
         })
+    }
+    componentDidMount(){
+        this.getCartItemCount();
+    }
+    async getCartItemCount(){
+        const resp=await axios.get('/api/getcartitemcount.php');
+        this.updateCartItems(resp.data.itemCount);
     }
     render(){
         return(
