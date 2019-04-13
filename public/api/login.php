@@ -20,6 +20,7 @@ if(empty($input['password'])){
 }
 $email = $input['email'];
 $password = $input['password'];
+
 $email=addslashes($email);
 
 $hashed_password=sha1($password);
@@ -27,10 +28,21 @@ $hashed_password=sha1($password);
 unset($input['password']);
 
 $query = "SELECT `id`,`name` FROM `users`
-    WHERE `email` = '$email' AND 
-    `password` = '$hashed_password'";
+    WHERE `email` = ? AND 
+    `password` = ?
+";
 
-$result = mysqli_query($conn,$query);
+$statement = mysqli_prepare($conn,$query); //1)send safe query to DB
+
+mysqli_stmt_bind_param($statement,'ss',$email,$hashed_password); //2)send dangerous data to db
+
+$result=mysqli_stmt_execute($statement);//3)tell db to mix the query and the data
+
+$result=mysqli_stmt_get_result($statement);//4)get the result pointer for the prepared query statement's data
+
+// $result = mysqli_query($conn,$query);
+//not needed anymore because of prepared statement
+
 
 if (!$result){
     throw new Exception(mysqli_error($conn));
