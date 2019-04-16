@@ -16,7 +16,7 @@
 
 import {combineReducers} from 'redux';
 //builds what your initial state is (combining all the default states)
-import {userReducer} from './user_reducer'
+import userReducer from './user_reducer'
 import {reducer as formReducer} from 'redux-form';
 
 const rootReducer = combineReducers({
