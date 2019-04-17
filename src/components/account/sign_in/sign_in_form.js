@@ -5,7 +5,7 @@ import Input from '../../general/input';
 
 const SignInForm = props =>{
     console.log('sign in props',props);
-    const {handleSubmit,signIn}=props;
+    const {handleSubmit,signIn}=props
     return(
         <form onSubmit={handleSubmit(signIn)}>
             <div className="row">
@@ -20,6 +20,23 @@ const SignInForm = props =>{
 }
 
 
+//for redux forms... form values is the NAME PROP
+//can destructure in parameters
+function validate(values){
+    const {email,password} = values;
+    const errors = {};
+    if(!email){
+        errors.email = 'Please enter your email'
+    }
+    if (!password){
+        errors.password = 'Please enter your password'
+    }
+    return errors;
+}
+
+
+
 export default reduxForm({
-    form:'sign-in-form'
-})(SignInForm);
+    form:'sign-in-form',//doesnt reference this anywhere else
+    validate: validate//validate function
+})(SignInForm);//pass it the component
