@@ -4,7 +4,6 @@ import Input from '../../general/input';
 
 
 const SignInForm = props =>{
-    console.log('sign in props',props);
     const {handleSubmit,signIn}=props
     return(
         <form onSubmit={handleSubmit(signIn)}>

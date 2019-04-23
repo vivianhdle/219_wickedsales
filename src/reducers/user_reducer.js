@@ -1,6 +1,8 @@
+import types from "../actions/types";
+
 const DEFAULT_STATE={
     auth:false,
-    username:'',
+    email:'',
 }
 
 // exampleAction = {
@@ -11,10 +13,12 @@ const DEFAULT_STATE={
 //type property will tell Redux what to update in the state
 //takes in a default state
 
-function userReducer(state = DEFAULT_STATE,action){//action is an object
+function userReducer(state = DEFAULT_STATE,action){//action is an object from src/actions so they are a 1:1
     switch(action.type){
-        case 'SIGN_IN':
-            return {...state, auth:true, username:action.username};
+        case types.SIGN_IN:
+            return {...state, auth:true, email:action.email};
+        case types.SIGN_OUT:
+            return {...DEFAULT_STATE};
         default:
             return state;
     }
