@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import ProductItem from './product_item';
+import {connect} from 'react-redux';
+import {getAllProducts} from '../../actions'
 
 class ProductList extends Component{
     constructor(props){
@@ -13,18 +15,12 @@ class ProductList extends Component{
         this.props.history.push(`/products/${id}`)
     }
     componentDidMount(){
-        this.getProducts();
-    }
-    getProducts(){
-        axios.get('/api/getproducts.php').then(resp =>{
-            this.setState({
-                products:resp.data.products
-            })
-        })
+        this.props.getAllProducts();
     }
     render(){
+        console.log('product list props:',this.props)
         const {products} = this.state
-        const productList = products.map((product)=>{
+        const productList = this.props.products.map((product)=>{
             return <ProductItem key={product.id} {...product} goToDetails={this.goToDetails}/>
         })
         return(
@@ -38,4 +34,12 @@ class ProductList extends Component{
     }
 }
 
-export default ProductList;
+function mapStateToProps(state){
+    return {
+        products:state.products.list
+    }
+}
+
+export default connect(mapStateToProps,{
+    getAllProducts:getAllProducts
+})(ProductList);
