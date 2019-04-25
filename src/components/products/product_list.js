@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import ProductItem from './product_item';
 import {connect} from 'react-redux';
 import {getAllProducts} from '../../actions'
@@ -18,7 +17,6 @@ class ProductList extends Component{
         this.props.getAllProducts();
     }
     render(){
-        console.log('product list props:',this.props)
         const {products} = this.state
         const productList = this.props.products.map((product)=>{
             return <ProductItem key={product.id} {...product} goToDetails={this.goToDetails}/>

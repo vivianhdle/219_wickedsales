@@ -11,6 +11,7 @@ import NotFound from './404'
 import Cart from './cart';
 import axios from 'axios';
 
+
 class App extends Component {
     constructor(props){
         super(props);

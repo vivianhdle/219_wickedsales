@@ -53,8 +53,6 @@ class ProductAdd extends Component{
     }
     render(){
         const {modalOpen,cartQty,totalPrice,qty} = this.state;
-
-        console.log(this.props);
         return(
             <div className="right-align add-to-cart">
                 <span className="qty-container">

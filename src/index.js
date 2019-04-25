@@ -7,10 +7,22 @@ import {createStore, applyMiddleware} from 'redux';
 import rootReducer from './reducers'
 import think from './components/middleware/think';
 import App from './components/app';
+import types from './actions/types';
+import {checkAuth} from './actions'
+
 
 const store = createStore(rootReducer, applyMiddleware(think));
 //redux store is your state.. a little more complicated than just an object
 //as a whole it's where your data is at
+if (localStorage.getItem('signedIn')==='true'){
+    store.dispatch({
+        type: types.SIGN_IN,
+        email:'loading'
+    })
+    checkAuth()(store.dispatch);
+}
+
+
 
 ReactDOM.render(
     <Provider store={store}>

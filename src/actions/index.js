@@ -1,18 +1,35 @@
 import types from './types';
 import axios from 'axios';
 
+
+export const checkAuth = () => async dispatch => {
+    const resp = await axios.get('/api/check-auth.php');
+    if (resp.data.success){
+        return dispatch({
+            type:types.SIGN_IN,
+            email:resp.data.email
+        })
+    } 
+    return dispatch({
+            type:types.SIGN_OUT
+        })
+};
+
+
 //THESE functions have to return an object with a type property
 //an async await will always return a promise
 //middleware used to intercept promises
 //dispatch will send the action back into the action creator
 
+
 export function signIn(user){//will receive an object of user info
     return function(dispatch){
-        axios.get('/api/sign_in.php').then(resp=>{
-            console.log('sign in resp:', resp)
-            if (resp.data.succes){
+        axios.post('/api/sign-in.php',user).then(resp=>{
+            if (resp.data.success){
+                localStorage.setItem('signedIn', true);
                     dispatch({
-                    type:types.SIGN_IN
+                    type:types.SIGN_IN,
+                    email:resp.data.email
                 })
             }else {
                 dispatch({
@@ -32,8 +49,13 @@ export function signIn(user){//will receive an object of user info
 }
 
 export function signOut(user){
-    return{
-        type:types.SIGN_OUT
+    return function(dispatch){
+        axios.get('/api/sign-out.php').then(resp=>{
+            localStorage.removeItem('signedIn');
+            dispatch({
+                type:types.SIGN_OUT
+            })
+        });
     }
 }
 
